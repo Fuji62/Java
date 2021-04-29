@@ -1,44 +1,31 @@
 import java.util.Calendar;
-
-public class CalendarClass {
+public class CalendarAPI {
     public static void main(String[] args){
         Calendar calendar = Calendar.getInstance();
 
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int date = calendar.get(Calendar.DATE);
+        int year = calendar.get(Calendar.YEAR);   //今日の西暦を取得
+        int month = calendar.get(Calendar.MONTH); //今日の月を取得
 
-        //今日の日付
-        System.out.println("今日の日時は"+ year +"年"+ (month + 1) +"月"+ date +"日");
-
-        //今月の開始曜日
-        calendar.set(year, month, 1);
-        String[] week = {"日","月","火","水","木","金","土"};
+        calendar.set(year, month, 1); //今月の開始曜日を取得
         int startWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        System.out.println((month + 1) +"月1日は"+ week[startWeek - 1] +"曜日です");  // 1:日曜日
 
-        //今月の最終日
-        calendar.set(year, month, 0);
+        calendar.set(year, month, 0); //今月の最終日を取得
         int lastDate = calendar.get(Calendar.DATE) -1;
-        System.out.println((month + 1) +"月は"+ lastDate +"日までです");
 
-        //今月分の日数を配列に格納する
-        int[] calendarDate = new int[42];
-        int count = 0;
-        for(int i = 1; i <= lastDate; i++){
-            calendarDate[count++] = i;
+        int[] calendarDate = new int[42]; //今月分の日数を配列に格納する
+        int k = 0;
+        for(; k < startWeek - 1; k++) calendarDate[k] = 0; //前月日分は0で埋める
+        for(int i = 0; i < (41 - k); i++) {
+            if (i < lastDate) calendarDate[k + i] = i + 1;
+            else calendarDate[k + i] = 0;
         }
-
-        int weekCount = count / 7;
-        for(int i = 0; i < weekCount; i++) {
-            for (int j = i * 7; j < i * 7 + 7; j++) {
-                if (calendarDate[j] < 10) {
-                    System.out.print(" " + calendarDate[j] + " ");
-                } else {
-                    System.out.print(calendarDate[j] + " ");
-                }
-            }
-            System.out.print("\r\n");
+        System.out.println("\t\t" + (month + 1) + "月"); //カレンダー出力
+        System.out.println("　日 月 火 水 木 金 土");
+        for (int i = 0; i < 41; i++) {
+            if(calendarDate[i] == 0) System.out.print(" - ");
+            else if(calendarDate[i] != 0) System.out.printf("%2d ", calendarDate[i]);
+            if((i + 1) % 7 == 0) System.out.println();
+            if((i + 1) % 7 == 0 && calendarDate[i] == 0) break;
         }
     }
 }
