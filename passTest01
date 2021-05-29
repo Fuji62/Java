@@ -1,0 +1,31 @@
+/*通過テスト～クラスとは～
+ 1.
+　クラスの主な機能は[➀ F.プログラム実行機能]と[➁ G.オブジェクト定義機能]である。
+　new演算子を使ってひとつのクラスからいくつもの[➂ B.オブジェクト]を作成できる。
+　作成した[➂]を組み合わせて処理を実現するのがオブジェクト指向の方法である。
+　また、オブジェクト指向の3つの特徴として継承、カプセル化、多態性（[➃ D.ポリモーフィズム]）がある。 
+ */
+
+/*2-1*/
+package practice01;
+
+public class Rect {
+	double vertical;
+	double side;
+}
+
+
+/*2-2*//*
+package practice01;
+
+public class UseRect {
+	public static void main(String[] args) {
+		Rect r = new Rect();
+		r.vertical = 15;
+		r.side = 10;
+		
+		System.out.println("r:  " + r.side + " × " + r.vertical);
+	}
+}
+
+*/
