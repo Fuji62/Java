@@ -1,0 +1,93 @@
+//同じパッケージに別のクラスとして定義する
+//===================================================
+//1-3-1
+package practice01;
+
+public class Point {
+	double x;
+	double y;
+}
+\\---------------------------------------------------
+package practice01;
+
+public class Exec01 {
+	public static void main(String[] args) {
+		Point p = new Point();
+		
+		p.x = 1.5;
+		p.y = -0.7;
+		
+		System.out.println(p.x);
+		System.out.println(p.y);
+	}
+}
+
+//===================================================
+//1-3-2
+package practice01;
+
+public class Member {
+	String number;
+	String name;
+	int age;
+}
+\\---------------------------------------------------
+package practice01;
+
+public class Exec02 {
+	public static void main(String[] args) {
+		Member m1 = new Member();
+		Member m2 = new Member();
+		m1.number = "A0101";
+		m1.name = "田中宏";
+		m1.age = 25;
+		m2.number = "A0111";
+		m2.name= "鈴木太郎";
+		m2.age = 28;
+		
+		System.out.println("番号: " + m1.number);
+		System.out.println("名前: " + m1.name);
+		System.out.println("年齢: " + m1.age);
+		System.out.println("番号: " + m2.number);
+		System.out.println("名前: " + m2.name);
+		System.out.println("年齢: " + m2.age);
+	}
+}
+
+//===================================================
+//1-3-3
+package practice01;
+
+public class Player {
+	String handle;
+	int[] hand;
+	int tips;
+}
+\\---------------------------------------------------
+package practice01;
+public class Exec {
+	public static void main(String[] args) {
+		Player player1 = new Player();
+		player1.handle = "Tom";
+		
+		player1.hand = new int[5];
+		player1.hand[0] = 2;
+		player1.hand[1] = 13;
+		player1.hand[2] = 26;
+		player1.hand[3] = 13;
+		player1.hand[4] = 48;
+
+		player1.tips = 50;
+		
+		System.out.println("呼び名=" + player1.handle);
+		System.out.print("手札配列={");
+		for(int i = 0; i < player1.hand.length; i++) {
+			System.out.print(player1.hand[i] + " ");
+		}
+		System.out.println("]");
+		System.out.println("現在のチップ数=" + player1.tips);
+	}
+}
+
+
+
