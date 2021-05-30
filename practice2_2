@@ -1,0 +1,17 @@
+package practice02;
+
+public class Glass {
+	String code;
+	double capacity;
+	int price;
+	public Glass(String s, double x, int p) {
+		code = s;
+		capacity = x;
+		price = p;
+	}
+	public Glass(String s, double x) {
+		code = s;
+		capacity = x;
+	}
+	public Glass() {}
+}
