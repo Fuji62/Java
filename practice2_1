@@ -1,0 +1,94 @@
+package practice02;
+
+public class Point {
+	double x;
+	double y;
+	
+	Point(double a, double b) {
+		x = a;
+		y = b;
+	}
+}
+//----------------------------------------
+package practice02;
+
+public class ExecPoint {
+	public static void main(String[] args) {
+		Point p1 = new Point(1.5, -0.7);
+		Point p2 = new Point(1.2, 2);
+		
+		System.out.println("p1=(" + p1.x + "," + p1.y + ")");
+		System.out.println("p2=(" + p2.x + "," + p2.y + ")");
+	}
+}
+
+
+//----------------------------------------
+package practice02;
+
+public class Member {
+	String number;
+	String name;
+	int age;
+	
+	Member(String a, String b, int c){
+		number = a;
+		name = b;
+		age = c;
+	}
+}
+
+
+//----------------------------------------
+package practice02;
+
+public class ExecMember {
+	public static void main(String[] args) {
+		Member m1 = new Member("A0101", "田中　宏", 25);
+		Member m2 = new Member("A0111", "鈴木 太郎", 28);
+		
+		System.out.println("m1=" + m1.number + "," + m1.name + "," + m1.age);
+		System.out.println("m2=" + m2.number + "," + m2.name + "," + m2.age);
+	}
+}
+
+
+//----------------------------------------
+package practice02;
+
+public class Player {
+	String handle;
+	int[] hand;
+	int chips;
+	
+	Player(String a, int[] b, int c){
+		handle = a;
+		hand = b;
+		chips = c;
+	}
+}
+
+
+//----------------------------------------
+package practice02;
+
+public class ExecPlayer {
+
+	public static void main(String[] args) {
+		Player dealer = new Player("comp", new int[] {5,16,22,31,33}, 150);
+		Player player1 = new Player("Tom", new int[] {2,13,26,13,48}, 50);
+		
+		System.out.print(dealer.handle +", {");
+		for(int i = 0; i < dealer.hand.length; i++) System.out.print(dealer.hand[i] +" ");
+		System.out.println("}, "+ dealer.chips);
+		
+		System.out.print(player1.handle +", {");
+		for(int i = 0; i < player1.hand.length; i++) System.out.print(player1.hand[i] +" ");
+		System.out.println("}, "+ player1.chips);
+	}
+}
+
+
+//----------------------------------------
+
+
