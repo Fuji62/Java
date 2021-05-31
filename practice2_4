@@ -1,0 +1,40 @@
+//1
+//正しいものはどれか
+
+//A.参照型の初期値として用いられる有効でない参照をnullという 
+//C. オブジェクトをコピーするには Book book1 = new Book("舞姫", "森鴎外", 320)としておいてから、Book book2 = book1;とすればよい
+//E.int[] n = {1, 2, 3}; int[] m = n;としたとき、m[1]は2である
+
+
+//******************************************
+//2
+//次のプログラムをコンパイル・実行するとどうなるか
+package practice02;
+
+public class Color {
+	int cl;
+	public Color(int c) {
+		cl = c;
+	}
+	public void show() {
+		System.out.println(cl);
+	}
+}
+
+//***********************
+package practice02;
+
+public class ExecColor {
+
+    public static void main(String[] args) {
+        //
+    //	Color c = 128;
+        //c.show();
+
+    }
+}
+
+//D. 12行目でコンパイルエラーになる
+
+
+//******************************************
