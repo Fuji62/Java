@@ -1,0 +1,160 @@
+package passtest02;
+//1
+//問1 2つの引数を持つコンストラクタを追加
+//問2 showメソッドを追加
+
+
+public class Timer {
+	int interval;
+	int num;
+	
+	//コンストラクタをここに挿入
+	public Timer(int i, int n) {
+		this.interval = i;
+		this.num = n;
+	}
+	
+	void show(){
+		System.out.println("interval=" + interval + "秒");
+		System.out.println("num=" + num + "回");
+	}
+}
+
+//問3 UseTimerクラスを作成
+package passtest02;
+
+public class UseTimer {
+	public static void main(String[] args) {
+		Timer time = new Timer(15, 5);
+		time.show();
+	}
+}
+
+
+
+//**********************************************************
+package passtest02;
+
+//2
+//問1 Hand()に入る引数は何か
+
+public class Hand {
+	String[] cards; 
+	
+	public Hand(String[] c) {
+		cards = c;
+	}
+}
+
+//問2 Hand型オブジェクトh1とh2を作成
+package passtest02;
+
+public class ExecHand {
+	public static void main(String[] args) {
+		Hand h1 = new Hand(new String[] {"ハート10", "スぺード2"});
+		Hand h2 = new Hand(new String[] {"ダイヤ12", "ハート5", "クラブ2"});
+	}
+}
+
+
+
+//**********************************************************
+//3
+package passtest02;
+
+public class Dog {
+	String name;
+	int age;
+	public Dog(String s) {name = s;}
+	public Dog(String s, int n) {name = s; age = n;}
+}
+//正しいコンストラクタ呼び出し
+//D. Dog dog = new Dog("john", 10);
+
+//**********************************************************
+//4
+
+package passtest02;
+//コンパイル・実行するとどうなるか
+
+public class Glass {
+	double capacity;
+	public Glass(double c) {
+		capacity = c;
+	}
+}
+
+//A.正常にコンパイル実行される
+
+
+package passtest02;
+//コンパイル・実行するとどうなるか
+
+public class Exec {
+	public static void main(String[] args) {
+//		Glass g = new Glass();
+//		g.capacity = 100;
+
+	}
+}
+
+// B.9行目でコンパイルエラー
+
+
+
+//**********************************************************
+//5
+
+package passtest02;
+//次のコードを実行したときどうなるか
+
+class Dog{
+	String name;
+	void show() {System.out.println(name);}
+}
+
+public class UseDog {
+	public static void main(String[] args) {
+		Dog tom;
+		tom.name = "トム";
+		tom.show();
+
+	}
+}
+
+// D.8行目でコンパイルエラー
+// E.9行目でコンパイルエラー
+
+
+
+//**********************************************************
+//6
+
+package passtest02;
+//次のコードを実行したときどうなるか
+
+class Product{
+	String code;
+	int price;
+	public Product(String c, int p) {
+		code = c; price = p;
+	}
+	void show() {System.out.println(code +":"+ price);}
+}
+
+public class Exec2 {
+	public static void main(String[] args) {
+		Product p1,p2 = null;
+		p1 = new Product("X123", 1000);
+		p2.code = p1.code;
+		p2.price = p1.price;
+		p2.show();
+	}
+}
+
+//I. 13行目で実行時例外
+
+//**********************************************************
+
+
+
