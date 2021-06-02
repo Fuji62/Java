@@ -1,0 +1,48 @@
+//3
+//問1.  Productクラスをカプセル化する
+//問2.  価格に負の値が入力された場合0をセットするようにする
+
+public class Product {
+	private String code;
+	private int price;
+	
+	public Product() {}
+	public String getCode() {return code;}
+	public int getPrice() {return price;}
+	
+	public void setCode(String c) {this.code = c;}
+	public void setPrice(int p) {
+		if(price < 0) price = 0;
+    else this.price = p;
+	}
+	
+}
+
+//************************************************************
+//問3.  3件の伝票データをもとにオブジェクトを作成し、内容を表示する
+
+public class ExecProduct {
+	public static void main(String[] args) {
+		Product p1 = new Product();
+		Product p2 = new Product();
+		Product p3 = new Product();
+		
+		p1.setCode("A101");
+		p2.setCode("A102");
+		p3.setCode("A103");
+		p1.setPrice(3500);
+		p2.setPrice(2000);
+		p3.setPrice(5500);
+		
+		System.out.println("商品\t金額");
+		System.out.println(p1.getCode() +"\t"+  p1.getPrice());
+		System.out.println(p2.getCode() +"\t"+  p2.getPrice());
+		System.out.println(p3.getCode() +"\t"+  p3.getPrice());
+
+	}
+}
+
+//************************************************************
+
+
+
