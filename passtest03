@@ -1,0 +1,94 @@
+//1
+//問1.  仕様に従ってCashbookクラスを作成する
+
+package passtest03;
+
+public class Cashbook {
+	private int balance;
+	
+	public Cashbook() {}
+	public Cashbook(int b) {this.balance = b;}
+	
+	public void deposit(int n) {balance += n;}
+	public void drownOut(int n) {
+		if(balance < n) balance = 0;
+		else balance -= n;
+	}
+	public int getBalance() {return balance;}
+}
+
+
+//*******************************************************************************
+//問2.  仕様に従ってExecクラスを作成する
+package passtest03;
+
+public class Exec {
+	public static void main(String[] args) {
+		Cashbook myBook = new Cashbook(1000);
+		myBook.deposit(500);
+		myBook.drownOut(800);
+		System.out.println("残額＝"+ myBook.getBalance() +"円");
+	}
+}
+
+//出力結果
+
+//*******************************************************************************
+//2 空欄に入る適語
+//➀ カプセル化
+//➁ private
+//➂ アクセサ
+//➃ public
+
+//*******************************************************************************
+//3　次のプログラムの誤り5つ
+
+//次のプログラムの誤りを指摘する
+package passtest03;
+
+public class Product {
+	private String code;
+	public int price;
+	public String setCode(String c) {
+		code = c;
+		return c;
+	}
+	void setPrice(int p) {
+		price = p;
+	}
+	public String getCode() {return code;}
+	public int getprice() {return price;}
+}
+
+
+//アクセス修飾子がpublicになっている
+//コンストラクタがない
+//戻り値が設定されている
+//pablicがついていない
+//フィールド変数の頭文字が大文字になっていない
+
+//*******************************************************************************
+//4 次のコードをコンパイル・実行するとき正しいものはどれか
+
+import passtest03.p1.Dog;
+package passtest03.p1;
+public class Dog {
+	private String name;
+	private String getName() {return name;}
+	void setName(String s) {name=s;}
+}
+
+package passtest03.p2;
+public class Exec {
+	public static void main(String[] args) {
+		Dog d = new Dog();
+		d.setName("トム");
+
+	}
+}
+
+// B. Execの4行目でコンパイルエラー
+
+
+
+//*******************************************************************************
