@@ -1,0 +1,42 @@
+//1.  正しいものはどれか
+// E. DogクラスとCatクラスをDog.javaファイルに書く時、Catクラスをpublicにできない
+
+
+
+//2. 次のコードをコンパイル・実行するとどうなるか
+package com.wjava.pass.p40;
+public class Dog {}
+class Cat() {}
+
+package com.wjava.pass.p41;
+import com.wjava.pass.p40.*;
+public class Exec {
+	public static void main(String[] args) {
+		com.wjava.pass.p40.Dog d = new com.wjava.pass.p40.Dog();
+		com.wjava.pass.p40.Cat c = new com.wjava.pass.p40.Cat();
+	}
+}
+
+//D. Execの6行目でコンパイルエラーになる
+
+
+//3. 次のコードをコンパイル・実行するとどうなるか
+public class Dog {
+	static int n = 1;
+	public static void main(String[] args) {
+		Dog dog = new Dog();
+		System.out.println(dog.n);
+	}
+}
+
+//A. 1と表示する
+
+
+//4. 空欄に当てはまる文または語
+
+//➀ public class Cat
+//➁ String n
+//➂ show()
+//➃ import pk.20.Cat;
+
+
