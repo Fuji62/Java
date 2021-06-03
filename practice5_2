@@ -1,0 +1,36 @@
+//1. コンストラクタとして正しく機能するコードはどれか
+public class Dog {
+	String name;
+	Dog(String name){
+		
+	}
+}
+//D. this.name = name;
+
+
+
+//2. 空欄に書くコードとして適切なものはどれか
+public class Aword {
+	double length;
+	double weight;
+	
+}
+
+// C. public void Aword(double a, double b){length = a; weight = b;}
+// D. public Aword(){}
+// F. Aword(double length){this.length = length; weight = 0.0;}
+
+
+
+//3. このコードをコンパイル・実行するとき正しいものはどれか
+public class Dog {
+	static String name;
+	public static void main(String[] args) {
+		Dog dog = new Dog();
+		this.name = "ジョン";
+		System.out.println(name);
+	}
+}
+
+// B. 5行目でコンパイルエラー
+
