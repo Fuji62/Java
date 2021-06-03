@@ -1,0 +1,16 @@
+//1. コンパイルエラーにならないコードはどれか
+public class Tool {
+	int number;
+	double weight;
+	public Tool(int number, double weight) {
+		this.number = number;
+		this.weight = weight;
+	}
+	public Tool(String s){number=0; weight=s;}
+}
+
+//B. Tool(){}
+//C. public Tool(int n){number=n;}
+//E. public void Tool(int n, double w){number=n; weight=w;}
+//F. public Tool(double w){number=0; weight=w;}
+//H. public Tool(char a, double b){number=a; weight=b;}
