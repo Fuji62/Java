@@ -1,0 +1,28 @@
+//1. コンパイルエラーにならないコンストラクタ―はどれか
+public class Member {
+	int n;
+	String s;
+	
+}
+
+// A. Member(){ System.out.println("hello"); }
+// C. void Member(int a, String b){ n=a; s=b; }
+//    警告:このメソッドにはコンストラクタ―名があります
+// D. Member(){}
+
+
+
+
+//2. このコードを実行した結果として正しいものはどれか
+public class Timer {
+	int seconds;
+	public void Timer(int s) {
+		seconds = s;
+	}
+	public static void main(String[] args) {
+		Timer t = new Timer(100);
+		System.out.println(t.seconds);
+	}
+}
+
+// D. 7行目でコンパイルエラー
