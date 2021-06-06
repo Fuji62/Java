@@ -1,0 +1,52 @@
+//1. コンストラクタに書いてもエラーにならないものはどれか
+
+public class Animal {
+	String name;
+	String food;
+	int age;
+	public Animal(String name) {
+		this(name, "", -1);
+	}
+	public Animal(String name, int age) {
+		this(name, "", age);
+	}
+	public Animal(String name, String food, int age) {
+		this.name = name;
+		this.food = food;
+		this.age = age;
+	}
+}
+
+//【解答】
+//D. public Animal(int age, String name) {this(name, "", age);}
+//E. public Animal() {this("", "", -1);}
+
+//-------------------------------------------------------------------
+//2. 次のコードにある誤りを２つ指摘する
+//【解答】
+//1) 6行目：thisは最初に書かれていない
+//2) 13行目：thisはメソッドでは使えない
+
+
+//-------------------------------------------------------------------
+//3. 次のクラスの空欄を埋めて記述を完成させる
+
+public class Product {
+	String code;
+	int color;
+	int price;
+	public Product() {this(➀);}
+	public Product(String code) {this(➁);}
+	public Product(String code, int color) {this(➂);}
+	public Product(String code, int color, int price) {➃}
+}
+
+//【解答】
+//➀ this("", 9, -1);
+//➁ this(code, 9, -1);
+//➂ this(code, color, -1);
+//➃ this(code, color, price);
+
+
+
+
