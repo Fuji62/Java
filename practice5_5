@@ -1,0 +1,54 @@
+//1. 空欄に書くことができるメソッドはどれか
+
+public class Number {
+	private int n;
+	public void setN(int n) {this.n = n;}
+
+}
+
+//B. double setN(double x) {this.n = (int)x; return n;}
+//D. int setN() {n = -1; return n;}
+
+
+//--------------------------------------------------------
+//2. ➀、➁の部分を作成する
+
+public class Sign {
+	private int sign;
+	public void setSign(int sign) {
+		//➀
+		if(sign >= 0 && sign <= 2) this.sign = sign;
+	}
+	public void setSign(String sign) {
+		//➁
+		if(sign == "z") this.sign = 0;
+		else if(sign == "+") this.sign = 1;
+		else if(sign == "-") this.sign = 2;
+	}
+	public int getSign() {
+		return sign;
+	}
+}
+
+//➀ if(sign >= 0 && sign >= 2) this.sign = sign;
+//➁ if(sign == "z") this.sign = 0;
+//	 else if(sign == "+") this.sign = 1;
+//	 else if(sign == "-") this.sign = 2;
+
+
+//--------------------------------------------------------
+//3. isMultipleメソッドを作成する
+
+public class Number {
+	private int n;
+	public Number(int n) {this.n = n;}
+	public int getN() {return n;}
+	
+	//isMultipleメソッド
+	public boolean isMultiple(int m) {
+		if(n % m == 0) return true;
+		else return false;
+	}
+}
+
+//--------------------------------------------------------
