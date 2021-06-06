@@ -1,0 +1,84 @@
+//1. コンストラクタを書く
+
+class Article{
+	String author;
+	String subject;
+	public Article(String author) {this("", author);}
+	
+	//コンストラクタ
+	public Article() {}
+	public Article(String author, String subject) {
+		this.author = author;
+		this.subject = subject;
+	}
+}
+
+public class Exec{
+	public static void main(String[] args) {
+		Article a = new Article();
+		System.out.println(a);
+	}
+}
+
+
+//-----------------------------------------------------------------------
+//2. 次のコードをコンパイル・実行するとどうなるか
+
+public class Size {
+	static int size;
+	public void setSize(int size) {
+		this.size = size;
+	}
+	public static void main(String[] args) {
+		Size s = new Size();
+		s.setSize(50);
+		System.out.println(this.size);
+	}
+}
+
+//D. 9行目でコンパイルエラー
+
+
+//-----------------------------------------------------------------------
+//3. 空欄に当てはまるものはどれか
+
+public class Metal {
+	String en;
+	double sg;
+	int price;
+	public Metal() {
+		//空欄
+	}
+	public Metal(String e) {
+		this(0, 0, e);
+	}
+	public Metal(double s, int p, String e) {
+		en = e;
+		sg = s;
+		price = p;
+	}
+}
+
+//B. this(0, 0, "");
+//F. this("");
+
+
+
+//-----------------------------------------------------------------------
+//4. 次のコードで➀、➁に当てはまるのはどれか
+
+public class Man {
+	double weight;
+	
+	//➀
+	public Man(double w) {weight = w;}
+	
+	
+	//➁
+	public void setWeight(double w) {weight = w;}
+}
+
+//➀ Man(String s){ weight = (double)weight;
+//➁ void setWeight() {weight = 0;}
+
+
