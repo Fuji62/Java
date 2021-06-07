@@ -1,0 +1,76 @@
+package database;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("1円以上のアイテム一覧表を表示する");
+		ArrayList<Item> items = ItemDAO.findByMinimumPrice(1);
+		for(Item item : items) {
+			System.out.printf("%10s%4d%4d", item.getName(), item.getPrice(), item.getWeight());
+		}
+	}
+}
+//------------------------------------------------------------------------------------------
+package database;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("1円以上のアイテム一覧表を表示する");
+		ArrayList<Item> items = ItemDAO.findByMinimumPrice(1);
+		for(Item item : items) {
+			System.out.printf("%10s%4d%4d", item.getName(), item.getPrice(), item.getWeight());
+		}
+	}
+}
+//------------------------------------------------------------------------------------------
+package database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class ItemDAO{
+	static final String URL = "jdbc:mysql://localhost:3306/basic?characterEncoding=UTF-8&useSSL=false &serverTimezone=GMT%2B9";
+			//"jdbc:mysql://localhost:3306/basic?";
+	static final String USERNAME = "root";
+	static final String PASSWORD = "rootroot";
+	static Connection con = null;
+
+
+	public static ArrayList<Item> findByMinimumPrice(int i){
+		try {
+			Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			PreparedStatement pstmt =
+					con.prepareStatement("SELECT * FROM ITEMS WHERE PRICE > ?");
+			pstmt.setInt(1, i);
+			ResultSet rs = pstmt.executeQuery();
+
+			ArrayList<Item> items = new ArrayList<Item>();
+			while(rs.next()) {
+				Item item = new Item();
+				item.setName(rs.getString("NAME"));
+				item.setPrice(rs.getInt("PRICE"));
+				item.setWeight(rs.getInt("WEIGHT"));
+				items.add(item);
+			}
+			rs.close();
+			pstmt.close();
+			return items;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+}
+
