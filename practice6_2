@@ -1,0 +1,9 @@
+//練習6-2
+//1.➀ ➁ の空欄に入るコード
+
+//➀ return new Number(this.n + m.n);
+//➁ Number c = a.add(b);
+
+
+
+
