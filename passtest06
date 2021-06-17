@@ -1,69 +1,42 @@
-package practice06;
+//2
+//問1 Pointクラスを作成する
 
 public class Point {
     private double x;
     private double y;
-    public Point(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-    public Point(double a) {
-        this.x = a;
-        this.y = a;
-    }
+    public Point(double x, double y) {this.x = x; this.y = y;}
+    public Point(double a) {this(a, a);}
 
     public double getX() {return this.x;}
     public double getY() {return this.y;}
 
-    public Point add(Point p) {
-        System.out.println("☆");
-        x += p.getX();
-        y += p.getY();
-        return p;
-    }
-    public Point sub(Point p) {
-        System.out.println("★");
-        x -= p.getX();
-        y -= p.getY();
-        return p;
-    }
-    public Point mul(Point p) {
-        x *= p.getX();
-        y *= p.getY();
-        return p;
-    }
-    public Point div(Point p) {
-        x /= p.getX();
-        y /= p.getY();
-        return p;
-    }
+    public Point add(Point p) {	return new Point(this.x + p.x, this.y + p.y);}
+    public Point sub(Point p) {return new Point(this.x - p.x, this.y - p.y);}
+    public Point mul(Point p) {return new Point(this.x * p.x, this.y * p.y);}
+    public Point div(Point p) {return new Point(this.x / p.x, this.y / p.y);}
 
-    public String toString() {
-        return "(" + this.x + ", " + this.y + ")";
-    }
-}
-
+    public String toString() {return "(" + this.x + ", " + this.y + ")";}
 
 //**************************************************************************
 
-package practice06;
+
+//問2 p0を表示するプログラムExec2を作成する
 
 public class Exec2 {
     public static void main(String[] args) {
-        Point p1 = new Point(10.5, 12.4);
+    	Point p  = new Point(2, 2);
+    	Point p1 = new Point(10.5, 12.4);
         Point p2 = new Point(2.4, 10.7);
         Point p3 = new Point(0.3, -0.5);
 
         Point p0 = new Point(0);
 
-        p0 = p1.add(p2);
-        System.out.println(p0.toString());
-
-        p0 = p2.sub(p1);
-        System.out.println(p0.toString());
+        //p0 = 2 * p3*(p1 + p2) - p3
+        p0 = p.mul(p3).mul(p1.add(p2)).sub(p3);
+        System.out.println("p0=" + p0.toString());
     }
 }
 
-
+//****************************************************************************
 
 
