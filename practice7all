@@ -1,0 +1,109 @@
+//練習7-1
+//1
+//問1 ➀ ➁ ➂に当てはまる内容
+//➀ extends Name
+//➁ name
+//➂ nickname
+
+//問2 A B C Dに当てはまる適語
+//A Nickname saburoh = new Nickname();
+//B setName("三郎");
+//C setNickname("さんちゃん");
+//D dispWho();
+
+
+//2
+//問1 ColorBallクラスを作成する
+
+public class ColorBall extends Ball{
+	private int color;
+	void setColorBall(int color) {
+		if(color >= 0 && 255 >= color) this.color = color;
+	}
+	int getColorBall() {return color;}
+}
+
+//問2 UseBallクラスを作成する
+
+public class UseBall {
+	public static void main(String[] args) {
+		ColorBall c = new ColorBall();
+		c.setSize(20);
+		c.setColorBall(128);
+		System.out.println("size=" + c.getSize() + " : color="+ c.getColorBall());
+	}
+}
+
+//*************************************************************
+//練習7-2
+
+//1 次のクラス宣言で正しいもの
+//E. class Dog extends Animal{}
+
+
+//2 挿入部分に書いてもコンパイルエラーにならないもの
+//A. c.setN(20);
+//C. c.getN();
+//D. Parent.s = "abc";
+//E. p.s = "a"; 
+//F. c.s = "b";
+
+
+//*************************************************************
+//練習7-3
+
+//1 正しいクラス宣言
+//A. class Music extends Sound{}
+//D. class Beep extends Sound{}
+//G. class Sound extends Object{}
+
+
+//*************************************************************
+//練習7-4
+
+//1 ➀～➆に当てはまる語句
+//➀ Two
+//➁ One
+//➂ Object
+//➃ Object
+//➄ One
+//➅ Two
+//➆ Three
+
+//2 枠内に入るBのコンストラクタ
+// B(int nb){this.nb = nb;}
+
+//3 
+//問1 正しい文
+//B. ➁と➂のデフォルトコンストラクタは同じである
+
+//問2 ➂のクラスのデフォルトコンストラクタ
+// super();
+
+//4 正しいものはどれか
+//C. 6行目でコンパイルエラー
+
+//5 次のクラスの誤り
+// super(); がコンストラクタの先頭に書かれていない。
+
+
+
+//*************************************************************
+//練習7-5
+
+//1 空欄を適語で埋める
+//➀ E. 同じパッケージ内のクラスからは見えるが他のパッケージのクラスからは見えない
+//➁ G. 他のパッケージから見えるようになる
+//➂ A. ほかのパッケージであってもサブクラスなら見えるようになる
+//➃ C. 見えない
+//➄ なし
+//➅ B. 同じクラスのメンバだけ
+//➆ I. public、デフォルト、protected、private
+//➇ D. 見える
+//➈ C. 見えない
+
+//2 ➀に書き込むことのできないコード
+//C. getN()
+
+
+
