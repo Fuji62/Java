@@ -36,7 +36,67 @@
 
 //-------------------------------------------------------------------
 
+//練習9-2
 
+//1. 「ここにオーバーライドを挿入」の位置に挿入できるコード
+//B. protected short show(int n){return 1;}
+//F. public short show(int n){return n;}
+
+
+//2. 次のA～Eは➀オーバーロード、➁オーバーライドのどちらか
+//A. ➁オーバーライド
+//B. ➀オーバーロード
+//C. ➁オーバーライド
+//D. ➁オーバーライド
+//E. ➁オーバーライド
+
+
+//3
+//問1. Parentクラスのコンストラクタを作成する
+
+	public Parent() {}
+	public Parent(int n, String s, double x) {
+		this.n = n;
+		this.s = s;
+		this.x = x;
+	}
+
+
+//問2. Parentクラスを継承したChildクラスを作成する
+
+class Child extends Parent{
+
+	public Child(int n, String s, double x) {
+		super.n = n;
+		super.s = s;
+		super.x = x;
+	}
+	void disp() {
+		System.out.println(s + "=" + n + ":" + x);
+	}
+	double ans () {
+		return Math.sqrt(x);
+	}
+	boolean isOk() {
+		if(x == 0 || x > 0) return true;
+		return false;
+	}
+}
+
+
+//問3. Childクラスのオーバーライドが動作することをテストするプログラム
+
+public class Exec2 {
+
+	public static void main(String[] args) {
+		Child c = new Child(10, "データ",  12.3);
+		
+		c.disp();
+		System.out.println("ans = " + c.ans());
+		System.out.println("isOk = " + c.isOk());
+	}
+
+}
 
 
 //-------------------------------------------------------------------
