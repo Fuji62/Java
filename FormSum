@@ -1,7 +1,5 @@
-//forSum.jsp
+//forSum.html
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +25,6 @@ step値<input type="text" name="step"><input type="submit" value="実行"><br><b
 
 //FormSum.java
 
-
 package servlet;
 
 import java.io.IOException;
@@ -39,7 +36,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet
+@WebServlet("/FormSum")
 public class FormSum extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -51,9 +48,9 @@ public class FormSum extends HttpServlet{
 		int first = Integer.parseInt(request.getParameter("first"));
 		int end = Integer.parseInt(request.getParameter("end"));
 		int step = Integer.parseInt(request.getParameter("step"));
-		int sum = first;
+		int sum = 0;
 
-		for(int i = first; i < end; i += step) {sum += step;}
+		for(int i = first; i <= end; i+=step) sum += i;
 
 		//HTMLを出力
 		response.setContentType("text/html; charset=UTF-8");
