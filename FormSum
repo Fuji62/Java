@@ -1,0 +1,72 @@
+//forSum.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h3>初期値、終値、step値を入力して合計を求める</h3>
+<!-- 入力フォーム -------------------------------------->
+<form action="/example/FormSum" method="post">
+<br>
+初期値<input type="text" name="first"><br><br>
+終　値<input type="text" name="end"><br><br>
+step値<input type="text" name="step"><input type="submit" value="実行"><br><br>
+
+</form>
+</body>
+</html>
+
+
+//********************************************************
+
+//FormSum.java
+
+
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet
+public class FormSum extends HttpServlet{
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+
+		//リクエストパラメータを取得
+		request.setCharacterEncoding("UTF-8");
+		int first = Integer.parseInt(request.getParameter("first"));
+		int end = Integer.parseInt(request.getParameter("end"));
+		int step = Integer.parseInt(request.getParameter("step"));
+		int sum = first;
+
+		for(int i = first; i < end; i += step) {sum += step;}
+
+		//HTMLを出力
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<!DOCTYPE html>");
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<meta charset=\"UTF-8\">");
+		out.println("<title>結果</title>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<h3>合　計：" + sum + "</h3>");
+		out.println("</body>");
+		out.println("</html>");
+	}
+}
