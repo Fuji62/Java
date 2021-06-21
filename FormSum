@@ -4,25 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
 
-<h3>初期値、終値、step値を入力して合計を求める</h3>
+<div>
+<h2>初期値、終値、step値を入力して数列の合計を求める</h2>
 <!-- 入力フォーム -------------------------------------->
 <form action="/example/FormSum" method="post">
-<br>
-初期値<input type="text" name="first"><br><br>
-終　値<input type="text" name="end"><br><br>
-step値<input type="text" name="step"><input type="submit" value="実行"><br><br>
-
+<label class="number">初期値<input type="text" name="first"></label><br><br>
+<label class="number">終　値<input type="text" name="end"></label><br><br>
+<label class="number">step値<input type="text" name="step"></label><br><br>
+<input class="run_button" type="submit" value="実行">
 </form>
+</div>
+
 </body>
 </html>
 
 
 //********************************************************
-
 //FormSum.java
 
 package servlet;
@@ -50,7 +52,7 @@ public class FormSum extends HttpServlet{
 		int step = Integer.parseInt(request.getParameter("step"));
 		int sum = 0;
 
-		for(int i = first; i <= end; i+=step) sum += i;
+		for(int i = first; i <= end; i+=step) {sum += i;}
 
 		//HTMLを出力
 		response.setContentType("text/html; charset=UTF-8");
@@ -67,3 +69,24 @@ public class FormSum extends HttpServlet{
 		out.println("</html>");
 	}
 }
+
+//********************************************************
+//styles.css
+
+@charset "UTF-8";
+div{
+	text-align: center;
+	font-family: 游ゴシック;
+}
+.number{
+	font-size: 18px;
+	text-align: justify; /*両端揃え*/
+	text-justify: inter-ideograph; /*explorer用*/
+}
+.run_button{
+	 background-color: limegreen;
+	 color:white;
+	 font-size: 18px;
+	 border-radius: 3px;
+}
+
