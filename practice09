@@ -100,14 +100,19 @@ public class Exec2 {
 
 
 //-------------------------------------------------------------------
+//練習9-3
 
-
-
+//1. 「ここへオーバーライドを挿入」の部分に挿入できるコード
+//A. protected Color paint(int c){return new Color();}
+//B. public Color paint(short c){return new Color();}
+//D. protected Black paint(intc){return this;}
+//E. public Black paint(int c, char ch){return this;}
 
 //-------------------------------------------------------------------
+//練習9-4
 
-
-
+//1. 「ここに挿入」の部分に書いてもコンパイルエラーにならないコード
+//A. f.disp(10);
 
 //-------------------------------------------------------------------
 
