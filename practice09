@@ -115,7 +115,49 @@ public class Exec2 {
 //A. f.disp(10);
 
 //-------------------------------------------------------------------
+//練習9-5
 
+//1.
+//問1. Calcクラスのコンストラクタを作成する
+//問2. xの値を表示するdispメソッドを作成する
+
+class Calc {
+	double x;
+	public Calc() {}
+	public Calc(double x) {this.x = x;}
+	double ans() {return x;}
+	public void disp() {
+		System.out.println("ans=" + x);
+	}
+}
+
+//***********************************
+//問3. Calcクラスを継承したSquareクラスを作成する
+
+class Square extends Calc{
+
+	public Square(double x){
+		super(x);
+	}
+	public double ans(double x) {
+		return  Math.sqrt(x);
+	}
+	public void disp() {
+		System.out.println(x + "の平方根は" + ans(x));
+	}
+}
+
+//***********************************
+//問4. Execクラスを作成する
+
+public class Exec {
+	public static void main(String[] args) {
+		Calc c = new Square(10.0);
+		c.disp();
+	}
+}
+
+//***********************************
 
 
 
