@@ -43,3 +43,23 @@
 </html>
 
 //***************************************************************************
+//seiseki1.css
+@charset "UTF-8";
+body{
+	text-align: center;
+}
+h2{
+	font-family: 游ゴシック;
+}
+ul li {
+    list-style: none;
+}
+.label{
+	font-family: 游ゴシック;
+	font-size: 16pt;
+	margin-right: 10px;
+	width:100px;
+/*    float: left;*/
+}
+
+//***************************************************************************
