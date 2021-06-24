@@ -6,15 +6,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/seiseki1.css">
 <title>学生の成績データ</title>
-<script type="text/javascript">
-function next_text(idx){
-	if(window.event.keyCode==13){//13はCRキー
-		document.mainForm.text1[idx].focus();
-		return false;
-	}
-	return true;
-}
-</script>
 </head>
 <body>
 	<div class="main">
@@ -25,7 +16,7 @@ function next_text(idx){
 		<form class="form" action="seiseki1.jsp" method="post">
 			<dl>
 				<dt><label class="label" for="number">学生番号</label></dt>
-				<dd><input class="input" type="text" name="number" onKeyDown="return next_name(1);"></dd>
+				<dd><input class="input" type="text" name="number" id="number"></dd>
 				<dt><label class="label" for="name">氏名</label></dt>
 				<dd><input class="input" type="text" name="name" id="name"></dd>
 				<dt><label class="label" for="c">C言語 </label></dt>
