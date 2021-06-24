@@ -1,10 +1,20 @@
 //seiseki1.html
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/seiseki1.css">
 <title>学生の成績データ</title>
+<script type="text/javascript">
+function next_text(idx){
+	if(window.event.keyCode==13){//13はCRキー
+		document.mainForm.text1[idx].focus();
+		return false;
+	}
+	return true;
+}
+</script>
 </head>
 <body>
 	<div class="main">
@@ -15,7 +25,7 @@
 		<form class="form" action="seiseki1.jsp" method="post">
 			<dl>
 				<dt><label class="label" for="number">学生番号</label></dt>
-				<dd><input class="input" type="text" name="number" id="number"></dd>
+				<dd><input class="input" type="text" name="number" onKeyDown="return next_name(1);"></dd>
 				<dt><label class="label" for="name">氏名</label></dt>
 				<dd><input class="input" type="text" name="name" id="name"></dd>
 				<dt><label class="label" for="c">C言語 </label></dt>
@@ -25,14 +35,15 @@
 				<dt><label class="label" for="java">Java言語</label></dt>
 				<dd><input class="input" type="text" name="java" id="java"></dd>
 			</dl>
-			<input class="button" type="submit" value=" 登  録 ">
-			<input class="button" type="reset" value="リセット">
-			<input class="button" type="submit" value=" 表  示 ">
+			<input class="button" name="button" type="submit" value="登録">
+			<input class="button" name="button" type="reset" value="リセット">
+			<input class="button" name="button" type="submit" value="表示">
 		</form>
 	</main>
 	</div>
 </body>
 </html>
+
 //***************************************************************************
 //seiseki1.css
 
@@ -59,29 +70,25 @@ dd{
 }
 .button{
 	margin-left: 15px;
+	width: 60px;
 }
 
 //***************************************************************************
-//seiseki1.jsp
+//register.jsp
 
-<%@page import="java.io.BufferedWriter"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="seiseki1/css/seiseki1_jsp.css">
-<title>成績の一覧</title>
+<title>入力結果</title>
 </head>
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String button = request.getParameter("button");
-	String file_path = application.getRealPath("seiseki1.txt");
-	
-	//登録ボタンが入力された場合→ファイル出力
-	if(button.equals("登録")){
+	String file_path = application.getRealPath("seiseki.txt"); //書き込み先
+	if(file_path != null){
 		try{
 			FileWriter file_w = new FileWriter(file_path, true);//オープン
 			BufferedWriter buf_w = new BufferedWriter(file_w);
@@ -90,34 +97,54 @@ dd{
 			str_buf.append(request.getParameter("name"));   str_buf.append("\t");
 			str_buf.append(request.getParameter("c"));      str_buf.append("\t");
 			str_buf.append(request.getParameter("math"));   str_buf.append("\t");
-			str_buf.append(request.getParameter("java"));   str_buf.append("\t");
+			str_buf.append(request.getParameter("java"));   str_buf.append("\t");		
+		
 			buf_w.write(str_buf.toString()); //書き込み
 			buf_w.newLine(); //復帰改行
 			buf_w.close(); //クローズ
+			out.print("<h4>「" + str_buf + "」書込み完了");
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-	//表示ボタンが入力された場合→ファイル入力
-	}else if(button.equals("表示")){
+	}else{
+		out.print("<h4>ファイルが存在しません");
+	}
+	out.println("<a href="+"seiseki1.html"+">→入力画面に戻る</a></h4>");
 %>
-			<div>
-				<header>
-					<h2>成績の一覧</h2>
-					<h4><a href="seiseki1.html">TOPへ</a></h4>
-				</header>
-				<main>
-					<table border="1">
-						<thead>
-							<tr>
-								<th id="number">学生番号</th>
-								<th id="name">氏名</th>
-								<th id="c">C言語</th>
-								<th id="math">数学</th>
-								<th id="java">Java言語</th>
-							</tr>
-						</thead>
-						<tbody>	
-<%		
+</body>
+</html>
+
+//***************************************************************************
+//display.jsp
+
+<%@ page import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/display.css">
+<title>成績の一覧</title>
+</head>
+<body>
+<div>
+<h2>成績の一覧</h2>
+<main>
+	<table border="1">
+		<thead>
+			<tr>
+				<th id="number">学生番号</th>
+				<th id="name">氏名</th>
+				<th id="c">C言語</th>
+				<th id="math">数学</th>
+				<th id="java">Java言語</th>
+			</tr>
+		</thead>
+			<tbody>	
+<%
+	request.setCharacterEncoding("UTF-8");
+	String file_path = application.getRealPath("seiseki.txt"); //読み取り先
+	if(file_path != null){ //ファイルが存在する場合のみ処理を行う
 		try{
 			FileReader file_r = new FileReader(file_path);//オープン
 			BufferedReader buf_r = new BufferedReader(file_r);
@@ -135,13 +162,17 @@ dd{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-	}//表示処理を終了
-%>						</tbody>
-					</table>
-				</main>
-			</div>
-		</body>
-	</html>
+		out.println("<h4><a href="+"seiseki1.html"+">→TOPへ</a></h4>");
+	}else{
+		out.print("<h4>ファイルが存在しません</h4>");
+	}
+%>
+			</tbody>
+		</table>
+	</main>
+</div>
+</body>
+</html>
 
 //***************************************************************************
 //seiseki1_jsp.css
@@ -161,5 +192,4 @@ th{
 	background-color: lightgray;
 	color:dimgray;
 }
-
 
