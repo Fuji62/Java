@@ -109,46 +109,23 @@ dd{
 // ●ここから
 //*************************************************************************
 	}else if(button.equals("表示")){
-		try(var buf_r = Files.newBufferedReader(Paths.get(file_r));){
-
-			String[] record = buf_r.split("\t");
-
-
-
-		}catch(IOExeption e){
+		try{
+			FileReader file_r = new FileReader(file_path);//オープン
+			BufferedReader buf_r = new BufferedReader(file_r);
+			String line;
+			while((line = buf_r.readLine()) != null){
+				String[] split_line = line.split("\t");
+				out.print("<tr>");
+				for(int i = 0; i < split_line.length; i++){
+					//レコードを出力 number,name,c,math,java
+					out.print("<td>" + split_line[i] + "</td>");
+				}
+				out.print("</tr>");
+			}
+			buf_r.close();
+		}catch(IOException e){
 			e.printStackTrace();
 		}
-%>
-		<div>
-		<header>
-			<h2>成績の一覧</h2>
-			<h4><a href="seiseki1.html">TOPへ</a></h4>
-		</header>
-		<main>
-			<table border="1">
-				<thead>
-					<tr>
-						<th id="number">学生番号</th>
-						<th id="name">氏名</th>
-						<th id="c">C言語</th>
-						<th id="math">数学</th>
-						<th id="java">Java言語</th>
-					</tr>
-				</thead>
-				<tbody>
-
-				<!-- 件数分のループ -->
-<%
-//					for(int i = 0; i < 0; i++){
-//						out.print("<tr>");
-//						out.print("<td>" + number + "</td>");
-//						out.print("<td>" + name + "</td>");
-//						out.print("<td>" + c + "</td>");
-//						out.print("<td>" + math + "</td>");
-//						out.print("<td>" + java + "</td>");
-//						out.print("</tr>");
-//					}
-	}
 %>
 				</tbody>
 			</table>
