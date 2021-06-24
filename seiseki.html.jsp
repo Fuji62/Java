@@ -93,14 +93,15 @@ dd{
 			buf_w.write(str_buf.toString()); //書き込み
 			buf_w.newLine(); //復帰改行
 			buf_w.close(); //クローズ
-			out.print("<h4>「" + str_buf + "」書込み完了");
+			out.print("<h4>「" + str_buf + "」書込み完了</h4>");
 		}catch(IOException e){
 			e.printStackTrace();
 		}
 	}else{
 		out.print("<h4>ファイルが存在しません");
 	}
-	out.println("<a href="+"seiseki1.html"+">→入力画面に戻る</a></h4>");
+	out.println("<h4><a href="+"seiseki1.html"+">→入力画面に戻る</a></h4>");
+	out.println("<h4><a href="+"display.jsp"+">→成績の一覧を表示する</a></h4>");
 %>
 </body>
 </html>
