@@ -71,44 +71,53 @@ dd{
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/seiseki1_jsp.css">
+<link rel="stylesheet" href="seiseki1/css/seiseki1_jsp.css">
 <title>成績の一覧</title>
 </head>
 <body>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String button = request.getParameter("button");
-	String file_path = application.getRealPath("seiseki1.dat");
+	String file_path = application.getRealPath("seiseki1.txt");
+	
+	//登録ボタンが入力された場合→ファイル出力
 	if(button.equals("登録")){
-		FileWriter file_w = new FileWriter(file_path, true);
-		BufferedWriter buf_w = new BufferedWriter(file_w);
-		StringBuffer str_buf = new StringBuffer();
-
-		str_buf.append(request.getParameter("number")); str_buf.append("\t");
-		str_buf.append(request.getParameter("name"));   str_buf.append("\t");
-		str_buf.append(request.getParameter("c"));      str_buf.append("\t");
-		str_buf.append(request.getParameter("math"));   str_buf.append("\t");
-		str_buf.append(request.getParameter("java"));   str_buf.append("\t");
-
-		buf_w.write(str_buf.toString()); //書き込み
-		buf_w.newLine(); //復帰改行
-		buf_w.close(); //ここを変えればデータベースにも書き込める
-%>
-
-<head><!-- 登録完了画面を表示するページ -->
-<meta charset="UTF-8">
-<title>登録完了</title>
-</head>
-<body>
-	<h3>レコードを書き込みました。<a href="seiseki1.html">→入力画面へ戻る</a></h3>
-</body>
-</html>
-
-<%
-//*************************************************************************
-// ●ここから
-//*************************************************************************
+		try{
+			FileWriter file_w = new FileWriter(file_path, true);//オープン
+			BufferedWriter buf_w = new BufferedWriter(file_w);
+			StringBuffer str_buf = new StringBuffer();
+			str_buf.append(request.getParameter("number")); str_buf.append("\t");
+			str_buf.append(request.getParameter("name"));   str_buf.append("\t");
+			str_buf.append(request.getParameter("c"));      str_buf.append("\t");
+			str_buf.append(request.getParameter("math"));   str_buf.append("\t");
+			str_buf.append(request.getParameter("java"));   str_buf.append("\t");
+			buf_w.write(str_buf.toString()); //書き込み
+			buf_w.newLine(); //復帰改行
+			buf_w.close(); //クローズ
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	//表示ボタンが入力された場合→ファイル入力
 	}else if(button.equals("表示")){
+%>
+			<div>
+				<header>
+					<h2>成績の一覧</h2>
+					<h4><a href="seiseki1.html">TOPへ</a></h4>
+				</header>
+				<main>
+					<table border="1">
+						<thead>
+							<tr>
+								<th id="number">学生番号</th>
+								<th id="name">氏名</th>
+								<th id="c">C言語</th>
+								<th id="math">数学</th>
+								<th id="java">Java言語</th>
+							</tr>
+						</thead>
+						<tbody>	
+<%		
 		try{
 			FileReader file_r = new FileReader(file_path);//オープン
 			BufferedReader buf_r = new BufferedReader(file_r);
@@ -126,13 +135,14 @@ dd{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-%>
-				</tbody>
-			</table>
-		</main>
-	</div>
-</body>
-</html>
+	}//表示処理を終了
+%>						</tbody>
+					</table>
+				</main>
+			</div>
+		</body>
+	</html>
+
 //***************************************************************************
 //seiseki1_jsp.css
 
