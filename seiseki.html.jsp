@@ -36,6 +36,35 @@
 </html>
 
 //***************************************************************************
+//seiseki1.jsp
+
+<%@ page  import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="seiseki1/css/seiseki1_jsp.css">
+<title>成績の一覧</title>
+</head>
+<body>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String button = request.getParameter("button");
+
+	if(button.equals("登録")){ //→ファイル出力処理へ
+		String path = "register.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
+	
+	}else if(button.equals("表示")){ //→ファイル入力処理へ
+		String path = "display.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
+	}
+%>
+</body>
+</html>
+
+//***************************************************************************
 //seiseki1.css
 
 @charset "UTF-8";
