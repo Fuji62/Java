@@ -1,27 +1,5 @@
 //************************************************************************
-//input.jsp
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/input.css">
-<title>入力画面</title>
-</head>
-<body>
-	<form action="/servlet/Search.java" method="post">
-		パスの指定<input type="text" name="path_name"><br>
-		<input class="button" type="submit" value="送信"><input type="reset" value="リセット">
-	</form>
-</body>
-</html>
-
-
-//************************************************************************
 //Search.java
-
 
 package servlet;
 import java.io.File;
@@ -40,7 +18,7 @@ public class Search extends HttpServlet {
 
 		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/input.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/input.jsp");
 			dispatcher.forward(request, response);
 		}
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,28 +29,45 @@ public class Search extends HttpServlet {
 			File file = new File(path_name);
 		    File[] fileList = file.listFiles();
 
-		    System.out.println("あああああああ");
 		    //リクエストスコープに保存
 			request.setAttribute("fileList", fileList);
 
 			//フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/output.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/output.jsp");
 			dispatcher.forward(request, response);
 	}
 }
 
 
+//************************************************************************
+//input.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/input.css">
+<title>入力画面</title>
+</head>
+<body>
+	<form action="/example/Search" method="post">
+		パスの指定<input type="text" name="path_name"><br>
+		<input class="button" type="submit" value="送信">
+		<input type="reset" value="リセット">
+	</form>
+</body>
+</html>
+
 
 //************************************************************************
 //output.jsp
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.io.File,java.io.IOException" %>
 <%@ page import="servlet.Search" %>
-<%
-	String path_name = request.getParameter("path_name");
-	File[] fileList = (File[]) request.getAttribute("fileList");
-%>
+<%	String path_name = request.getParameter("path_name");
+	File[] fileList = (File[]) request.getAttribute("fileList");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,23 +76,17 @@ public class Search extends HttpServlet {
 </head>
 <body>
 <div>
-  <h2>*** 表示 ***</h2>
+  <h2>***表示***</h2>
   <h4>フォルダ名</h4>
-<%
-	out.println("<p>"+ path_name +"</p>");
-%>
+<% out.println("<p>"+ path_name +"</p>");%>
   <h4>ファイル名</h4>
-<%
-	if (fileList != null) {
-      for (int i = 0; i < fileList.length; i++) {
-        out.println("<p>"+ fileList[i].getName() +"</p>");
-      }
-    }
-%>
+<% if (fileList != null) {
+     for (int i = 0; i < fileList.length; i++) {
+       out.println("<p>"+ fileList[i].getName() +"</p>");
+     }
+   }%>
 </div>
 </body>
 </html>
-
-
 
 
