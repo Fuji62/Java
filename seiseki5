@@ -1,0 +1,300 @@
+//seiseki5.jsp
+
+<%@ page import="java.io.*, java.util.*, java.nio.*" %>
+<%@ page import="java.time.ZonedDateTime, java.time.format.DateTimeFormatter" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/seiseki5.css">
+<title>学生の成績データ</title>
+</head>
+<body>
+	<% ZonedDateTime dt = ZonedDateTime.now(); %>
+	<p class="date">
+		<%= dt.format(DateTimeFormatter.ofPattern("Y/L/d/H:m")) %>
+	</p>
+	<header>
+		<h2>学生の成績データ</h2>
+	</header>
+	<main>
+	<div class="input_screen">
+		<form class="form" action="check.jsp" method="post">
+		<dl>
+			<dt><label class="label" for="number">学生番号</label></dt>
+			<dd><input class="input" type="text" name="number" id="number"></dd>
+			<dt><label class="label" for="name">氏名</label></dt>
+			<dd><input class="input" type="text" name="name" id="name"></dd>
+			<dt><label class="label" for="c">C言語 </label></dt>
+			<dd><input class="input" type="text" name="c" id="c"></dd>
+			<dt><label class="label" for="math">数学</label></dt>
+			<dd><input class="input" type="text" name="math" id="math"></dd>
+			<dt><label class="label" for="java">Java言語</label></dt>
+			<dd><input class="input" type="text" name="java" id="java"></dd>
+		</dl>
+		<input class="button" name="button" type="submit" value="登録">
+		<input class="button" name="button" type="reset" value="リセット">
+		<input class="button" name="button" type="submit" value="表示">
+		</form>
+	</div>
+	<div class="output_screen">
+		<dl>
+			<dt>番号:</dt><dd><%= request.getParameter("number") %></dd>
+			<dt>氏名:</dt><dd><%= request.getParameter("name") %></dd>
+			<dt>C言語:</dt><dd><%= request.getParameter("c") %></dd>
+			<dt>数学:</dt><dd><%= request.getParameter("math") %></dd>
+			<dt>Java言語:</dt><dd><%= request.getParameter("java") %></dd>
+		</dl>
+	</div>
+	</main>
+</body>
+</html>
+
+//-------------------------------------------------------------------
+//process.jsp
+
+<%@ page  import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String button = request.getParameter("button");
+	if(button.equals("登録")){ //→ファイル出力処理へ
+		String path = "register.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
+
+	}else if(button.equals("表示")){ //→ファイル入力処理へ
+		String path = "display.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
+	}
+%>
+</body>
+</html>
+
+
+
+//-------------------------------------------------------------------
+//register.jsp
+
+<%@ page import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page import="java.time.ZonedDateTime, java.time.format.DateTimeFormatter" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>入力結果</title>
+</head>
+<body>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String file_path = application.getRealPath("seiseki5.dat"); //書き込み先
+	if(file_path != null){
+		try{
+			FileWriter file_w = new FileWriter(file_path, true);//オープン
+			BufferedWriter buf_w = new BufferedWriter(file_w);
+			StringBuffer str_buf = new StringBuffer();
+			ZonedDateTime date_now = ZonedDateTime.now();
+			String date = date_now.format(DateTimeFormatter.ofPattern("Y/LL/dd/HH:mm"));
+			str_buf.append(request.getParameter("number")); str_buf.append("\t");
+			str_buf.append(request.getParameter("name"));   str_buf.append("\t");
+			str_buf.append(request.getParameter("c"));      str_buf.append("\t");
+			str_buf.append(request.getParameter("math"));   str_buf.append("\t");
+			str_buf.append(request.getParameter("java"));   str_buf.append("\t");
+			str_buf.append(date);   						str_buf.append("\t");
+
+
+			buf_w.write(str_buf.toString()); //書き込み
+			buf_w.newLine();                 //復帰改行
+			buf_w.close();                   //クローズ
+
+			String path = "seiseki5.jsp";
+			request.getRequestDispatcher(path).forward(request, response);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}else{
+		out.print("<h4>ファイルが存在しません</h4>");
+		out.println("<p><a href="+"seiseki5.jsp"+">→入力画面に戻る</a></p>");
+		out.println("<p><a href="+"display.jsp"+">→成績の一覧を表示する</a></p>");
+	}
+%>
+</body>
+</html>
+
+
+
+//-------------------------------------------------------------------
+//display.html
+
+<%@ page import="java.io.*, java.util.*, java.nio.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/display.css">
+<title>成績の一覧</title>
+</head>
+<body>
+
+<h2 class="title">成績の一覧</h2>
+<p class="backlink">
+	<% out.println("<h4><a href="+"seiseki5.jsp"+">→TOPへ</a></h4>"); %>
+</p>
+<main>
+<div class="table">
+	<table border="1">
+		<thead>
+			<tr>
+				<th id="number" class="num">番号</th>
+				<th id="name" class="name">氏名</th>
+				<th id="c" class="c">C言語</th>
+				<th id="math" class="math">数学</th>
+				<th id="java" class="java">Java言語</th>
+				<th id="date" class="date">登録日時</th>
+			</tr>
+		</thead>
+			<tbody>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String file_path = application.getRealPath("seiseki5.dat"); //読み取り先
+	if(file_path != null){ //ファイルが存在する場合のみ処理を行う
+		try{
+			FileReader file_r = new FileReader(file_path);//オープン
+			BufferedReader buf_r = new BufferedReader(file_r);
+			String line;
+			while((line = buf_r.readLine()) != null){
+				String[] split_line = line.split("\t");
+				out.print("<tr>");
+				for(int i = 0; i < split_line.length; i++){
+					//レコードを出力 number,name,c,math,java
+					out.print("<td>" + split_line[i] + "</td>");
+				}
+				out.print("</tr>");
+			}
+			buf_r.close();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}else{
+		out.print("<h4>ファイルが存在しません</h4>");
+		out.println("<p><a href="+"seiseki5.jsp"+">→入力画面に戻る</a></p>");
+		out.println("<p><a href="+"display.jsp"+">→成績の一覧を表示する</a></p>");
+	}
+%>
+			</tbody>
+		</table>
+	</div>
+</main>
+</body>
+</html>
+
+
+
+//-------------------------------------------------------------------
+
+
+/*seiseki5.css*/
+
+@charset "UTF-8";
+/*****************************************/
+/*時間表示の設定*/
+.date{
+	text-align: right;
+}
+/*****************************************/
+/*見出しの設定*/
+h2{
+	color:dimgray;
+	text-align: center;
+
+}
+/*****************************************/
+/*入力画面の設定*/
+.input_screen{
+	background-color: lightgray;
+	width: 255px;
+	height: 260px;
+	margin: 0 auto;
+}
+.input_screen dt{
+	width: 70px;
+	padding: 10px ;
+	float:left;
+	clear: both;
+}
+.input_screen dd{
+	padding: 10px;
+}
+.button{
+	margin-left: 15px;
+	width: 60px;
+}
+/*****************************************/
+/*出力画面の設定*/
+.output_screen{
+	border-color: lightgray;
+	border-style: solid;
+	border-width: 1px;
+	color: dimgray;
+	width: 250px;
+	height: 220px;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.output_screen dt{
+	width: 70px;
+	padding: 10px ;
+	float:left;
+	clear: both;
+}
+.output_screen dd{
+	padding: 10px;
+}
+/*****************************************/
+
+//---------------------------------------------------------------
+
+/*display.css*/
+
+@charset "UTF-8";
+/*****************************************/
+/*画面全体の設定*/
+.title{
+	margin: 0 auto;
+	text-align: center;
+}
+.backlink{
+	margin: 0 auto;
+	text-align: center;
+}
+/*****************************************/
+/*テーブルの設定*/
+table{
+	border-collapse: collapse;
+	margin: 3px auto;
+	text-align: center;
+}
+th{
+	background-color: lightgray;
+	color: dimgray;
+	width: 80px;
+}
+.num{width: 40px;}   /*番号*/
+.name{width: 100px;} /*名前*/
+.c{width: 70px;}     /*C言語*/
+.math{width: 70px;}  /*数学*/
+.java{width: 70px;}  /*Java*/
+.date{width: 130px;} /*登録日時*/
+/*****************************************/
+
+
+
